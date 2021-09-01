@@ -7,7 +7,6 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/linmingxiao/gneo/logx"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -16,7 +15,7 @@ type message struct {
 }
 
 func init() {
-	logx.Disable()
+	//logx.Disable()
 }
 
 func TestError(t *testing.T) {
