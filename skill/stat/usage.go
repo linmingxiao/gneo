@@ -1,7 +1,7 @@
 package stat
 
 import (
-	"gneo/skill/stat/internal"
+	"github.com/linmingxiao/gneo/skill/stat/internal"
 	"runtime"
 	"sync/atomic"
 	"time"
