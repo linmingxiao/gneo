@@ -1,6 +1,6 @@
 package rescue
 
-import "github.com/qinchende/gofast/logx"
+import "github.com/linmingxiao/gneo/logx"
 
 func Recover(cleanups ...func()) {
 	for _, cleanup := range cleanups {

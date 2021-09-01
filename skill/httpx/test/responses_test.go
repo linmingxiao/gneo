@@ -2,12 +2,12 @@ package test
 
 import (
 	"errors"
-	"github.com/qinchende/gofast/skill/httpx"
+	"github.com/linmingxiao/gneo/skill/httpx"
 	"net/http"
 	"strings"
 	"testing"
 
-	"github.com/qinchende/gofast/logx"
+	"github.com/linmingxiao/gneo/logx"
 	"github.com/stretchr/testify/assert"
 )
 

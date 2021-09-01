@@ -7,8 +7,8 @@ import (
 	"testing"
 	"time"
 
+	"github.com/linmingxiao/gneo/skill/timex"
 	"github.com/stretchr/testify/assert"
-	"github.com/qinchende/gofast/skill/timex"
 )
 
 const threshold = 10

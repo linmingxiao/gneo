@@ -7,7 +7,7 @@ import (
 	"encoding/base64"
 	"errors"
 
-	"github.com/qinchende/gofast/logx"
+	"github.com/linmingxiao/gneo/logx"
 )
 
 // ErrPaddingSize indicates bad padding size.

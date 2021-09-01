@@ -1,13 +1,13 @@
 package stat
 
 import (
+	"gneo/skill/stat/internal"
 	"runtime"
 	"sync/atomic"
 	"time"
 
-	"github.com/qinchende/gofast/logx"
-	"github.com/qinchende/gofast/skill/stat/internal"
-	"github.com/qinchende/gofast/skill/threading"
+	"github.com/linmingxiao/gneo/logx"
+	"github.com/linmingxiao/gneo/skill/threading"
 )
 
 const (

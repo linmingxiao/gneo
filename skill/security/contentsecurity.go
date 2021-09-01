@@ -12,10 +12,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/qinchende/gofast/logx"
-	"github.com/qinchende/gofast/skill/codec"
-	"github.com/qinchende/gofast/skill/httpx"
-	"github.com/qinchende/gofast/skill/iox"
+	"github.com/linmingxiao/gneo/logx"
+	"github.com/linmingxiao/gneo/skill/codec"
+	"github.com/linmingxiao/gneo/skill/httpx"
+	"github.com/linmingxiao/gneo/skill/iox"
 )
 
 const (

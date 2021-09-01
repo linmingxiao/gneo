@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/qinchende/gofast/logx"
-	"github.com/qinchende/gofast/skill/executors"
+	"github.com/linmingxiao/gneo/logx"
+	"github.com/linmingxiao/gneo/skill/executors"
 )
 
 var (

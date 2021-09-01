@@ -3,7 +3,7 @@ package syncx
 //
 //import (
 //	"errors"
-//	"github.com/qinchende/gofast/skill/lang"
+//	"github.com/linmingxiao/gneo/skill/lang"
 //)
 //
 //// ErrLimitReturn indicates that the more than borrowed elements were returned.

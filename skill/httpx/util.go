@@ -2,7 +2,7 @@ package httpx
 
 import (
 	"fmt"
-	"github.com/qinchende/gofast/logx"
+	"github.com/linmingxiao/gneo/logx"
 	"net/http"
 	"net/url"
 	"os"

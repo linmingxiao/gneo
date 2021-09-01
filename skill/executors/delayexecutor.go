@@ -4,7 +4,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/qinchende/gofast/skill/threading"
+	"github.com/linmingxiao/gneo/skill/threading"
 )
 
 type DelayExecutor struct {

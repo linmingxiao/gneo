@@ -1,8 +1,8 @@
 package threading
 
 import (
-	"github.com/qinchende/gofast/skill/lang"
-	"github.com/qinchende/gofast/skill/rescue"
+	"github.com/linmingxiao/gneo/skill/lang"
+	"github.com/linmingxiao/gneo/skill/rescue"
 )
 
 type TaskRunner struct {

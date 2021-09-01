@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	"github.com/qinchende/gofast/skill/fs"
+	"github.com/linmingxiao/gneo/skill/fs"
 )
 
 func TestProperties(t *testing.T) {

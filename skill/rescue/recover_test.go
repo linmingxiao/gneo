@@ -4,7 +4,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/qinchende/gofast/logx"
+	"github.com/linmingxiao/gneo/logx"
 	"github.com/stretchr/testify/assert"
 )
 

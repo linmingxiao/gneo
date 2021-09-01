@@ -3,8 +3,8 @@ package executors
 import (
 	"time"
 
-	"github.com/qinchende/gofast/skill/syncx"
-	"github.com/qinchende/gofast/skill/timex"
+	"github.com/linmingxiao/gneo/skill/syncx"
+	"github.com/linmingxiao/gneo/skill/timex"
 )
 
 type LessExecutor struct {

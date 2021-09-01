@@ -6,8 +6,8 @@ import (
 	"sync"
 	"testing"
 
+	"github.com/linmingxiao/gneo/skill/lang"
 	"github.com/stretchr/testify/assert"
-	"github.com/qinchende/gofast/skill/lang"
 )
 
 func TestWorkerGroup(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/qinchende/gofast/skill/mapping"
+	"github.com/linmingxiao/gneo/skill/mapping"
 )
 
 const (

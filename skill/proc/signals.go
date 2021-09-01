@@ -7,7 +7,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/qinchende/gofast/logx"
+	"github.com/linmingxiao/gneo/logx"
 )
 
 const timeFormat = "0102150405"

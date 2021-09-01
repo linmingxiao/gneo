@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/qinchende/gofast/skill/httpx"
+	"github.com/linmingxiao/gneo/skill/httpx"
 	"net/http"
 	"net/http/httptest"
 	"strconv"

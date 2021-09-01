@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/qinchende/gofast/skill/iox"
-	"github.com/qinchende/gofast/skill/lang"
+	"github.com/linmingxiao/gneo/skill/iox"
+	"github.com/linmingxiao/gneo/skill/lang"
 )
 
 const cgroupDir = "/sys/fs/cgroup"

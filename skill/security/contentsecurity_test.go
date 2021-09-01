@@ -15,9 +15,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/qinchende/gofast/skill/codec"
-	"github.com/qinchende/gofast/skill/fs"
-	"github.com/qinchende/gofast/skill/httpx"
+	"github.com/linmingxiao/gneo/skill/codec"
+	"github.com/linmingxiao/gneo/skill/fs"
+	"github.com/linmingxiao/gneo/skill/httpx"
 	"github.com/stretchr/testify/assert"
 )
 

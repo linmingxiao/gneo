@@ -10,11 +10,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/qinchende/gofast/logx"
-	"github.com/qinchende/gofast/skill/executors"
-	"github.com/qinchende/gofast/skill/proc"
-	"github.com/qinchende/gofast/skill/sysx"
-	"github.com/qinchende/gofast/skill/timex"
+	"github.com/linmingxiao/gneo/logx"
+	"github.com/linmingxiao/gneo/skill/executors"
+	"github.com/linmingxiao/gneo/skill/proc"
+	"github.com/linmingxiao/gneo/skill/sysx"
+	"github.com/linmingxiao/gneo/skill/timex"
 )
 
 const (

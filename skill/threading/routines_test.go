@@ -5,7 +5,7 @@ import (
 	"log"
 	"testing"
 
-	"github.com/qinchende/gofast/skill/lang"
+	"github.com/linmingxiao/gneo/skill/lang"
 	"github.com/stretchr/testify/assert"
 )
 

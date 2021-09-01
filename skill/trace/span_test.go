@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/qinchende/gofast/skill/stringx"
-	"github.com/qinchende/gofast/skill/trace/tracespec"
+	"github.com/linmingxiao/gneo/skill/stringx"
+	"github.com/linmingxiao/gneo/skill/trace/tracespec"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc/metadata"
 )

@@ -5,7 +5,7 @@ import (
 	"runtime"
 	"strconv"
 
-	"github.com/qinchende/gofast/skill/rescue"
+	"github.com/linmingxiao/gneo/skill/rescue"
 )
 
 func GoSafe(fn func()) {

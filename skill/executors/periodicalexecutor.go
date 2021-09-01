@@ -6,11 +6,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/qinchende/gofast/skill/lang"
-	"github.com/qinchende/gofast/skill/proc"
-	"github.com/qinchende/gofast/skill/syncx"
-	"github.com/qinchende/gofast/skill/threading"
-	"github.com/qinchende/gofast/skill/timex"
+	"github.com/linmingxiao/gneo/skill/lang"
+	"github.com/linmingxiao/gneo/skill/proc"
+	"github.com/linmingxiao/gneo/skill/syncx"
+	"github.com/linmingxiao/gneo/skill/threading"
+	"github.com/linmingxiao/gneo/skill/timex"
 )
 
 const idleRound = 10

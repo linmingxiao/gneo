@@ -9,7 +9,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/qinchende/gofast/logx"
+	"github.com/linmingxiao/gneo/logx"
 )
 
 const (

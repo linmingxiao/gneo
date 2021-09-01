@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/qinchende/gofast/skill/stringx"
+	"github.com/linmingxiao/gneo/skill/stringx"
 	"github.com/stretchr/testify/assert"
 )
 

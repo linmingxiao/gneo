@@ -3,7 +3,7 @@ package trace
 import (
 	"context"
 
-	"github.com/qinchende/gofast/skill/trace/tracespec"
+	"github.com/linmingxiao/gneo/skill/trace/tracespec"
 )
 
 var emptyNoopSpan = noopSpan{}

@@ -2,7 +2,7 @@ package metric
 
 import (
 	prom "github.com/prometheus/client_golang/prometheus"
-	"github.com/qinchende/gofast/skill/proc"
+	"github.com/linmingxiao/gneo/skill/proc"
 )
 
 type (

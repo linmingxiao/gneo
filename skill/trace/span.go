@@ -7,9 +7,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/qinchende/gofast/skill/stringx"
-	"github.com/qinchende/gofast/skill/timex"
-	"github.com/qinchende/gofast/skill/trace/tracespec"
+	"github.com/linmingxiao/gneo/skill/stringx"
+	"github.com/linmingxiao/gneo/skill/timex"
+	"github.com/linmingxiao/gneo/skill/trace/tracespec"
 )
 
 const (
