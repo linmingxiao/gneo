@@ -1,6 +1,6 @@
 package gneo
 
-import "github.com/qinchende/gofast/logx"
+import "github.com/linmingxiao/gneo/logx"
 
 type APPConfig struct {
 	LogConfig              logx.LogConfig

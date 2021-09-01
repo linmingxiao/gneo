@@ -4,7 +4,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/qinchende/gofast/skill/hash"
+	"github.com/linmingxiao/gneo/skill/hash"
 )
 
 // TempFileWithText creates the temporary file with the given content,

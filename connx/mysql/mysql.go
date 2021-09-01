@@ -14,13 +14,13 @@ type ConnConfig struct {
 	MaxIdle int    `json:",optional"`
 }
 
-type MySQLDas struct {
+type MSqlX struct {
 	Cli *sql.DB
 	Ctx context.Context
 }
 
-func NewMysqlConn(cf *ConnConfig) *MySQLDas {
-	mysqlX := MySQLDas{Ctx: context.Background()}
+func NewMysqlConn(cf *ConnConfig) *MSqlX {
+	mysqlX := MSqlX{Ctx: context.Background()}
 
 	db, err := sql.Open("mysql", cf.ConnStr)
 	if err != nil {

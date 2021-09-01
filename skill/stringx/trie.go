@@ -1,6 +1,6 @@
 package stringx
 
-import "github.com/qinchende/gofast/skill/lang"
+import "github.com/linmingxiao/gneo/skill/lang"
 
 const defaultMask = '*'
 

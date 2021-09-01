@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"sync"
 
-	"github.com/qinchende/gofast/skill/lang"
-	"github.com/qinchende/gofast/skill/mapping"
+	"github.com/linmingxiao/gneo/skill/lang"
+	"github.com/linmingxiao/gneo/skill/mapping"
 )
 
 const (

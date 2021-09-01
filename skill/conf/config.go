@@ -7,7 +7,7 @@ import (
 	"os"
 	"path"
 
-	"github.com/qinchende/gofast/skill/mapping"
+	"github.com/linmingxiao/gneo/skill/mapping"
 )
 
 var loaders = map[string]func([]byte, interface{}) error{

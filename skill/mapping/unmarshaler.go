@@ -10,9 +10,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/qinchende/gofast/skill/jsonx"
-	"github.com/qinchende/gofast/skill/lang"
-	"github.com/qinchende/gofast/skill/stringx"
+	"github.com/linmingxiao/gneo/skill/jsonx"
+	"github.com/linmingxiao/gneo/skill/lang"
+	"github.com/linmingxiao/gneo/skill/stringx"
 )
 
 const (

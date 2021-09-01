@@ -3,7 +3,7 @@ package stringx
 import (
 	"errors"
 
-	"github.com/qinchende/gofast/skill/lang"
+	"github.com/linmingxiao/gneo/skill/lang"
 )
 
 var (

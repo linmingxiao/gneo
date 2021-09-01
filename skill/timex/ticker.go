@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/qinchende/gofast/skill/lang"
+	"github.com/linmingxiao/gneo/skill/lang"
 )
 
 type (
