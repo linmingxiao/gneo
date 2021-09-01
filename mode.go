@@ -11,19 +11,33 @@ import (
 const EnvGinMode = "GIN_MODE"
 
 const (
-	// DebugMode indicates gin mode is debug.
+	//开发调试模式
 	DebugMode = "debug"
-	// ReleaseMode indicates gin mode is release.
-	ReleaseMode = "release"
-	// TestMode indicates gin mode is test.
+	//测试模式
 	TestMode = "test"
+	//预生产模式
+	ReleaseMode = "release"
+	//生产模式
+	ProductMode = "product"
 )
 
+// ++++++++++++++++++++++++++++++++++++++++++++++++
+// 当前运行处于啥模式：
 const (
-	debugCode = iota
-	releaseCode
-	testCode
+	modeDebugCode = iota
+	modeTestCode
+	modeReleaseCode
+	modeProductCode
 )
+
+// 日志文件的目标系统
+const (
+	LogTypeConsole    = "console"
+	LogTypeELK        = "elk"
+	LogTypePrometheus = "prometheus"
+)
+
+
 
 // DefaultWriter is the default io.Writer used by Gin for debug output and
 // middleware output like Logger() or Recovery().
@@ -37,7 +51,7 @@ var DefaultWriter io.Writer = os.Stdout
 // DefaultErrorWriter is the default io.Writer used by Gin to debug errors
 var DefaultErrorWriter io.Writer = os.Stderr
 
-var ginMode = debugCode
+var ginMode = modeDebugCode
 var modeName = DebugMode
 
 func init() {
@@ -53,11 +67,13 @@ func SetMode(value string) {
 
 	switch value {
 	case DebugMode:
-		ginMode = debugCode
+		ginMode = modeDebugCode
 	case ReleaseMode:
-		ginMode = releaseCode
+		ginMode = modeReleaseCode
 	case TestMode:
-		ginMode = testCode
+		ginMode = modeTestCode
+	case ProductMode:
+		ginMode = modeProductCode
 	default:
 		panic("gin mode unknown: " + value + " (available mode: debug release test)")
 	}

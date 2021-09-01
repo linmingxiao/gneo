@@ -13,7 +13,7 @@ const ginSupportMinGoVer = 13
 // IsDebugging returns true if the framework is running in debug mode.
 // Use SetMode(gin.ReleaseMode) to disable debug mode.
 func IsDebugging() bool {
-	return ginMode == debugCode
+	return ginMode == modeDebugCode
 }
 
 // DebugPrintRouteFunc indicates debug log output format.
