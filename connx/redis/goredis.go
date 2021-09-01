@@ -10,14 +10,16 @@ import (
 // go-redis
 type (
 	ConnConfig struct {
-		// single redis
-		Addr string `json:",optional"`
+
 
 		// sentinel
 		SentinelAddr []string `json:",optional"`
 		MasterName   string   `json:",optional"`
 		SentinelPass string   `json:",optional"`
 		SlaveOnly    bool     `json:",optional"`
+
+		// single redis
+		Addr string `json:",optional"`
 
 		// common
 		Pass     string `json:",optional"`
