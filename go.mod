@@ -11,7 +11,7 @@ require (
 	github.com/golang/protobuf v1.5.2
 	github.com/gomodule/redigo v1.8.5
 	github.com/json-iterator/go v1.1.11
-	github.com/linmingxiao/gneo v0.0.0-20210901064444-0f9b45d3a9eb
+	github.com/linmingxiao/gneo v0.0.0-20210831084748-b36163b79150
 	github.com/mattn/go-isatty v0.0.13
 	github.com/prometheus/client_golang v1.11.0
 	github.com/spaolacci/murmur3 v1.1.0
