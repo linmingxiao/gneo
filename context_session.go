@@ -3,11 +3,10 @@ package gneo
 import (
 	"github.com/linmingxiao/gneo/connx/redis"
 	"github.com/linmingxiao/gneo/jwtx"
+	"github.com/linmingxiao/gneo/logx"
 )
 
-var (
-	GSess *jwtx.CtxSession
-)
+
 
 
 type CtxSessionFunc interface {
@@ -15,10 +14,7 @@ type CtxSessionFunc interface {
 	InitToken() string  //初始化 Token
 }
 
-func (c *Context)InitSession(ctxSessConf *jwtx.CtxSessionConfig) {
-	if GSess != nil {
-		return
-	}
+func (c *Context)InitSession(ctxSessConf *jwtx.CtxSessionConfig) error {
 	var token string = ""
 	var tokIsNew bool = false
 	var sid string = ""
@@ -40,27 +36,34 @@ func (c *Context)InitSession(ctxSessConf *jwtx.CtxSessionConfig) {
 		c.Sess = &jwtx.CtxSession{
 			Session: jwtx.Session{
 				Sid:   sid,
-				Token: c.Sess.Token,
+				Token: token,
 				Saved: false,
+				Values: make(KV),
 			},
 			CtxSessionConfig: *ctxSessConf,
 			TokIsNew: tokIsNew,
 		}
 	}
 	if c.Sess.Redis == nil {
-		c.Sess.Redis = redis.NewGoRedis(&c.Sess.RedisConnCnf)
+		logx.DebugPrint("First init session redis...")
+		c.Sess.Redis = redis.GetSingletonRedis(&c.Sess.RedisConnCnf)
 	}
 	if tokIsNew{
+		c.Sess.Values = KV{
+			"Sid": sid,
+		}
+		logx.DebugPrint("Create a new session and save.")
 		_, err := c.Sess.SaveToRedis()
 		if err != nil {
-			panic(err)
+			return err
 		}
 	} else {
+		logx.DebugPrint("Load session from redis.")
 		_, err := c.Sess.LoadFromRedis(sid)
 		if err != nil{
-			panic(err)
+			return err
 		}
 	}
-	GSess = c.Sess
 	c.Sess.IsReady = true
+	return nil
 }

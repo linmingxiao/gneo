@@ -3,13 +3,15 @@ package mysql
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	_ "github.com/go-sql-driver/mysql"
-	"log"
+	"github.com/linmingxiao/gneo/logx"
 	"time"
 )
 
 type ConnConfig struct {
 	ConnStr string `json:",optional"`
+	MasterName string `json:",optional"`
 	MaxOpen int    `json:",default=100,range=[10:1000]"`
 	MaxIdle int    `json:",optional"`
 }
@@ -24,7 +26,9 @@ func NewMysqlConn(cf *ConnConfig) *MSqlX {
 
 	db, err := sql.Open("mysql", cf.ConnStr)
 	if err != nil {
-		log.Fatalf("Conn %s err: %s", cf.ConnStr, err)
+		logx.Error("Conn %s err: %s", cf.MasterName, err)
+	} else {
+		logx.Info(fmt.Sprintf("Mysql %s connect successfully.", cf.MasterName))
 	}
 	// See "Important settings" section.
 	db.SetConnMaxLifetime(time.Minute * 3)

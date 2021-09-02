@@ -39,9 +39,10 @@ func (ctxSess *CtxSession)LoadFromRedis(sid interface{})(bool, error) {
 	}
 	str, err := ctxSess.Redis.Get(sessKey)
 	if str == "" || err != nil {
-		str = `{}`
+		str = "{}"
 	}
-	err = json.Unmarshal(bytesconv.StringToBytes(str), ctxSess.Values)
+	bytes := bytesconv.StringToBytes(str)
+	err = json.Unmarshal(bytes, &ctxSess.Values)
 	if err != nil {
 		return false, err
 	}
@@ -54,7 +55,11 @@ func (ctxSess *CtxSession)SaveToRedis()(string, error)  {
 	if ctxSess.TokIsNew && ctxSess.Values[ctxSess.AuthField] == nil {
 		ttl = ctxSess.TTLNew
 	}
-	return ctxSess.Redis.Set(SessKeyPrefix+ctxSess.Sid, str, time.Duration(ttl)*time.Second)
+	res, err := ctxSess.Redis.Set(SessKeyPrefix+ctxSess.Sid, str, time.Duration(ttl)*time.Second)
+	if err == nil{
+		ctxSess.Saved = true
+	}
+	return res, err
 }
 
 func (ctxSess *CtxSession)SetRedisExpire(ttl int32)(bool, error){

@@ -33,6 +33,18 @@ type (
 	}
 )
 
+var GlobalRedisMap map[string] *GoRedisX = make(map[string] *GoRedisX)
+
+func GetSingletonRedis(cf *ConnConfig) *GoRedisX {
+	masterName := cf.MasterName
+	if GlobalRedisMap[masterName] != nil{
+		return GlobalRedisMap[masterName]
+	}
+	r := NewGoRedis(cf)
+	GlobalRedisMap[masterName] = r
+	return r
+}
+
 // 直接连接redis
 // go-redis 底层自带连接池功能，不需要你再管理了。
 // 看看 go-redis/redis.go 中的代码：
@@ -50,11 +62,11 @@ func NewGoRedis(cf *ConnConfig) *GoRedisX {
 			PoolSize:     cf.PoolSize,
 			MinIdleConns: cf.MinIdle,
 			OnConnect: func(ctx context.Context, cn *redis.Conn) error {
-				logx.Info(fmt.Sprintf("%s connected.", cn.String()))
+				logx.Info(fmt.Sprintf("%s——%s connected.", cf.MasterName, cn.String()))
 				return nil
 			},
 		})
-		logx.Info(fmt.Sprintf("Redis %s created.", cf.Addr))
+		logx.Info(fmt.Sprintf("Redis %s —— %s created.", cf.MasterName, cf.Addr))
 	} else if cf.SentinelAddr != nil {
 		// 通过sentinel连接 redis
 		rds.Cli = redis.NewFailoverClient(&redis.FailoverOptions{
@@ -67,7 +79,7 @@ func NewGoRedis(cf *ConnConfig) *GoRedisX {
 			PoolSize:         cf.PoolSize,
 			MinIdleConns:     cf.MinIdle,
 			OnConnect: func(ctx context.Context, cn *redis.Conn) error {
-				logx.Info(fmt.Sprintf("%s connected.", cn.String()))
+				logx.Info(fmt.Sprintf("%s —— %s connected.", cf.MasterName, cn.String()))
 				return nil
 			},
 		})
