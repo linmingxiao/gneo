@@ -1,6 +1,11 @@
 package render
 
-var MapErrorCode map[int32]string = map[int32]string{
+import (
+	"reflect"
+	"github.com/linmingxiao/gneo/logx"
+)
+
+var MapErrorCode map[int]string = map[int]string{
 	0: "请求成功",
 
 	-100: "鼎信汇金公募基金系统维护升级中，暂时无法访问，为此给您带来的不便深表歉意。",
@@ -10,6 +15,8 @@ var MapErrorCode map[int32]string = map[int32]string{
 
 	110:  "您还没有登录，请登录系统。",
 	111:  "登录失效，请您退出后重新登录系统",
+	112:  "当前账户还未注册，请先注册",
+	113:  "账户名或密码错误",
 
 	422:  "请求缺少参数或参数错误",
 	429:  "未根据请求参数获得相应的返回结果",
@@ -67,4 +74,55 @@ var MapErrorCode map[int32]string = map[int32]string{
 
 	10000: "交易密码错误,请重新输入",
 	10001: "交易密码锁定,请重置交易密码",
+}
+
+type ErrorX struct {
+	ErrCode int
+	ErrMsg string
+}
+
+func (err *ErrorX) Error() string {
+	if msg, ok:= MapErrorCode[err.ErrCode]; err.ErrCode != -1 && ok{
+		return msg
+	} else if err.ErrMsg != ""{
+		return err.ErrMsg
+	} else {
+		return "未知错误"
+	}
+}
+
+func NewErrorX(pms ...interface{}) *ErrorX{
+	if len(pms) == 2{
+		return &ErrorX{
+			ErrCode: pms[0].(int),
+			ErrMsg: pms[1].(string),
+		}
+	} else if len(pms) == 1{
+		if reflect.TypeOf(pms[0]).Kind() == reflect.Int{
+			errCode := pms[0].(int)
+			if errMsg, ok := MapErrorCode[errCode]; ok{
+				return &ErrorX{
+					ErrCode: errCode,
+					ErrMsg: errMsg,
+				}
+			} else {
+				return &ErrorX{
+					ErrCode: errCode,
+					ErrMsg: "未知错误",
+				}
+			}
+		} else if reflect.TypeOf(pms[0]).Kind() == reflect.String{
+			errMsg := pms[0].(string)
+			return &ErrorX{
+				ErrCode: -1,
+				ErrMsg: errMsg,
+			}
+		} else {
+			logx.Error("NewErrorX参数错误")
+			panic("NewErrorX参数错误")
+		}
+	} else {
+		logx.Error("NewErrorX参数错误")
+		panic("NewErrorX参数错误")
+	}
 }

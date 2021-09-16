@@ -4,6 +4,7 @@ import (
 	"github.com/linmingxiao/gneo/connx/redis"
 	"github.com/linmingxiao/gneo/internal/bytesconv"
 	"github.com/linmingxiao/gneo/internal/json"
+	"github.com/linmingxiao/gneo/render"
 	"time"
 )
 
@@ -38,15 +39,19 @@ func (ctxSess *CtxSession)LoadFromRedis(sid interface{})(bool, error) {
 		sessKey = SessKeyPrefix + sid.(string)
 	}
 	str, err := ctxSess.Redis.Get(sessKey)
-	if str == "" || err != nil {
-		str = "{}"
+
+	if err != nil || str == ""{
+		ctxSess.Values = map[string]interface{}{}
+		return false, render.NewErrorX(111)
+	} else{
+		bytes := bytesconv.StringToBytes(str)
+		err = json.Unmarshal(bytes, &ctxSess.Values)
+		if err != nil {
+			return false, err
+		}
+		return true, nil
 	}
-	bytes := bytesconv.StringToBytes(str)
-	err = json.Unmarshal(bytes, &ctxSess.Values)
-	if err != nil {
-		return false, err
-	}
-	return true, nil
+
 }
 
 func (ctxSess *CtxSession)SaveToRedis()(string, error)  {

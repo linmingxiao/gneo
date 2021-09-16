@@ -6,7 +6,7 @@ import (
 )
 
 //数据返回基本样式
-func NewRenderKV(status, msg string, code int32) KV {
+func NewRenderKV(status, msg string, code int) KV {
 	return KV{
 		"status": status,
 		"code":   code,
@@ -14,9 +14,12 @@ func NewRenderKV(status, msg string, code int32) KV {
 	}
 }
 
-
 func (c *Context) FaiErr(err error) {
-	c.Fai(-1, err.Error(), nil)
+	if errX, ok := err.(*render.ErrorX); ok{
+		c.Fai(errX.ErrCode, errX.ErrMsg, nil)
+	} else {
+		c.Fai(-1, err.Error(), nil)
+	}
 }
 
 func (c *Context) FaiMsg(msg string) {
@@ -36,7 +39,7 @@ func (c *Context) SucKV(obj KV) {
 }
 
 //按照错误码返回错误
-func (c *Context) FaiCode(errCode int32) {
+func (c *Context) FaiCode(errCode int) {
 	msg, ok:= render.MapErrorCode[errCode]
 	if !ok{
 		c.FaiCode(-1)
@@ -45,14 +48,14 @@ func (c *Context) FaiCode(errCode int32) {
 	}
 }
 
-func (c *Context) Fai(code int32, msg string, obj interface{}) {
+func (c *Context) Fai(code int, msg string, obj interface{}) {
 	jsonData := NewRenderKV("fai", msg, code)
 	if obj != nil {
 		jsonData["data"] = obj
 	}
 	c.faiKV(jsonData)
 }
-func (c *Context) Suc(code int32, msg string, obj interface{}) {
+func (c *Context) Suc(code int, msg string, obj interface{}) {
 	jsonData := NewRenderKV("suc", msg, code)
 	if obj != nil {
 		jsonData["data"] = obj
