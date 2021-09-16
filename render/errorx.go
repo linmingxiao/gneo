@@ -1,7 +1,7 @@
 package render
 
 import (
-	"reflect"
+	_ "reflect"
 	"github.com/linmingxiao/gneo/logx"
 )
 
@@ -98,8 +98,10 @@ func NewErrorX(pms ...interface{}) *ErrorX{
 			ErrMsg: pms[1].(string),
 		}
 	} else if len(pms) == 1{
-		if reflect.TypeOf(pms[0]).Kind() == reflect.Int{
-			errCode := pms[0].(int)
+		pms0 := pms[0]
+		switch pms0.(type) {
+		case int:
+			errCode := pms0.(int)
 			if errMsg, ok := MapErrorCode[errCode]; ok{
 				return &ErrorX{
 					ErrCode: errCode,
@@ -111,16 +113,39 @@ func NewErrorX(pms ...interface{}) *ErrorX{
 					ErrMsg: "未知错误",
 				}
 			}
-		} else if reflect.TypeOf(pms[0]).Kind() == reflect.String{
-			errMsg := pms[0].(string)
+		case string:
+			errMsg := pms0.(string)
 			return &ErrorX{
 				ErrCode: -1,
 				ErrMsg: errMsg,
 			}
-		} else {
+		default:
 			logx.Error("NewErrorX参数错误")
 			panic("NewErrorX参数错误")
 		}
+		//if reflect.TypeOf(pms[0]).Kind() == reflect.Int{
+		//	errCode := pms[0].(int)
+		//	if errMsg, ok := MapErrorCode[errCode]; ok{
+		//		return &ErrorX{
+		//			ErrCode: errCode,
+		//			ErrMsg: errMsg,
+		//		}
+		//	} else {
+		//		return &ErrorX{
+		//			ErrCode: errCode,
+		//			ErrMsg: "未知错误",
+		//		}
+		//	}
+		//} else if reflect.TypeOf(pms[0]).Kind() == reflect.String{
+		//	errMsg := pms[0].(string)
+		//	return &ErrorX{
+		//		ErrCode: -1,
+		//		ErrMsg: errMsg,
+		//	}
+		//} else {
+		//	logx.Error("NewErrorX参数错误")
+		//	panic("NewErrorX参数错误")
+		//}
 	} else {
 		logx.Error("NewErrorX参数错误")
 		panic("NewErrorX参数错误")
