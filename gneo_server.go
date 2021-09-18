@@ -17,6 +17,7 @@ func CreateServer(cfg *APPConfig) *GServer  {
 	server := new(GServer)
 	SetMode(cfg.RunMode)
 	router := New()
+	router.Use(Logger())
 	if cfg == nil{
 		server.APPConfig = &APPConfig{}
 	} else {
