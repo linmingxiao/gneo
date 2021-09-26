@@ -20,13 +20,9 @@ type Logger struct {
 
 // 全局的初始化日志
 func InitLogger(cfg *LogConfig) {
-
 	if cfg == nil{
-		cfg = &LogConfig{
-
-		}
+		cfg = &LogConfig{}
 	}
-
 	loggerOnce.Do(func() {
 		var (
 			ioWriter io.Writer
@@ -52,8 +48,12 @@ func InitLogger(cfg *LogConfig) {
 //********************************************************
 //对外的方法
 
+func Log(values ...interface{})  {
+	fmt.Fprintln(logger.ioWriter, values...)
+}
+
 func Trace(values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= trace{
 		params := []interface{}{"[Trace]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -61,7 +61,7 @@ func Trace(values ...interface{})  {
 }
 
 func Debug(values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= debug{
 		params := []interface{}{"[Debug]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -69,19 +69,15 @@ func Debug(values ...interface{})  {
 }
 
 func Info(values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= info{
 		params := []interface{}{"[Info]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
 	}
 }
 
-func Log(values ...interface{})  {
-	fmt.Fprintln(logger.ioWriter, values...)
-}
-
 func Warn(values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= warn{
 		params := []interface{}{"[Warn]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -89,7 +85,7 @@ func Warn(values ...interface{})  {
 }
 
 func Error(values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= error{
 		params := []interface{}{"[Error]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -97,7 +93,7 @@ func Error(values ...interface{})  {
 }
 
 func Fatal(format string, values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= fatal{
 		params := []interface{}{"[Fatal]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -106,7 +102,7 @@ func Fatal(format string, values ...interface{})  {
 
 
 func Tracef(format string, values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= trace{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -115,7 +111,7 @@ func Tracef(format string, values ...interface{})  {
 }
 
 func Debugf(format string, values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= debug{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -124,7 +120,7 @@ func Debugf(format string, values ...interface{})  {
 }
 
 func Infof(format string, values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= info{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -133,7 +129,7 @@ func Infof(format string, values ...interface{})  {
 }
 
 func Warnf(format string, values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= warn{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -142,7 +138,7 @@ func Warnf(format string, values ...interface{})  {
 }
 
 func Errorf(format string, values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= error{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -151,7 +147,7 @@ func Errorf(format string, values ...interface{})  {
 }
 
 func Fatalf(format string, values ...interface{})  {
-	if logger.level >= trace{
+	if logger.level <= fatal{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}

@@ -61,13 +61,13 @@ func (c *Context)InitSession(ctxSessConf *jwtx.CtxSessionConfig) error {
 		c.Sess.Values = KV{
 			"sid": sid,
 		}
-		logx.Info("Create a new session and save.")
+		logx.Debug("Create a new session and save.")
 		_, err := c.Sess.SaveToRedis()
 		if err != nil {
 			return err
 		}
 	} else {
-		logx.Info("Load session from redis.")
+		logx.Debug("Load session from redis.")
 		_, err := c.Sess.LoadFromRedis(sid)
 		if err != nil{
 			return err
