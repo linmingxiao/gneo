@@ -192,7 +192,7 @@ func getTopDuration(tasks []Task) float32 {
 
 func log(report *StatReport) {
 	writeReport(report)
-	logx.Statf("(%s) - qps: %.1f/s, drops: %d, avg time: %.1fms, med: %.1fms, "+
+	logx.Tracef("(%s) - qps: %.1f/s, drops: %d, avg time: %.1fms, med: %.1fms, "+
 		"90th: %.1fms, 99th: %.1fms, 99.9th: %.1fms",
 		report.Name, report.ReqsPerSecond, report.Drops, report.Average, report.Median,
 		report.Top90th, report.Top99th, report.Top99p9th)

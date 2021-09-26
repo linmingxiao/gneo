@@ -8,6 +8,6 @@ func Recover(cleanups ...func()) {
 	}
 
 	if p := recover(); p != nil {
-		logx.ErrorStack(p)
+		logx.Error(p)
 	}
 }

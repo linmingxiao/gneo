@@ -5,32 +5,34 @@ package logx
 var currConfig *LogConfig
 
 type LogConfig struct {
-	ServiceName        string `json:",optional"`
-	Mode               string `json:",default=console,options=console|file|volume"`
-	Level              string `json:",default=info,options=info|error|severe"` // 记录日志的级别
-	Path               string `json:",default=logs"`                           // 日志文件路径
-	FilePrefix         string `json:",optional"`                               // 日志文件名统一前缀
-	FileNumber         int8   `json:",default=0,range=[0:2]"`                  // 日志文件数量
-	Compress           bool   `json:",optional"`
-	KeepDays           int    `json:",optional"`
-	StackArchiveMillis int    `json:",default=100"`
-	NeedCpuMem         bool   `json:",default=true"`
-	StyleName          string `json:",default=sdx,options=json|json-mini|sdx|sdx-mini"`
-	style              int8   `inner:",optional"` // 日志模板样式
+	ServiceName string `json:",optional"`
+	Mode        string `json:",default=console,options=console|file|volume"`
+	Level       int8   `json:",default=0"`    // 记录日志的级别
+	Path        string `json:",default=logs"` // 日志文件路径定义到文件夹
+	FilePrefix  string `json:",default=gneo"` // 日志文件名统一前缀
+	Compress    bool   `json:",optional"`     // 是否压缩
+	KeepDays    int    `json:",optional"`
+	NeedCpuMem  bool   `json:",default=true"`
+	style       int8   `inner:",default=0"` // 日志模板样式
 }
 
 const (
-	fileAll int8 = iota // 默认0：不同级别放入不同的日志文件
-	fileOne             // 1：全部放在一个日志文件access中
-	fileTwo             // 2：只分access和error两个文件
+	modeConsole string = "console" //只输出控制台
+	modeFile string = "file" //只输出文件
+	modeVolume string = "volume" //同时输出控制台和文件
 )
 
-// 日志样式名称
+//日志级别
 const (
-	styleJsonStr     = "json"
-	styleJsonMiniStr = "json-mini"
-	styleSdxStr      = "sdx"
-	styleSdxMiniStr  = "sdx-mini"
+	//*********info级别日志*******
+	trace int8 = iota  //详细日志 最全类型
+	debug //调试模式日志
+	info //信息级别日志 通常都为有效信息
+
+	//**********错误级别日志**********
+	warn //警告级别日志 需注意
+	error //错误级别日志 需处理
+	fatal //灾难级错误 会导致系统down掉
 )
 
 // 日志样式类型

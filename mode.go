@@ -30,15 +30,6 @@ const (
 	modeProductCode
 )
 
-// 日志文件的目标系统
-const (
-	LogTypeConsole    = "console"
-	LogTypeELK        = "elk"
-	LogTypePrometheus = "prometheus"
-)
-
-
-
 // DefaultWriter is the default io.Writer used by Gin for debug output and
 // middleware output like Logger() or Recovery().
 // Note that both Logger and Recovery provides custom ways to configure their

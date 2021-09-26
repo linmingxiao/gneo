@@ -18,17 +18,17 @@ func (c *Context)InitSession(ctxSessConf *jwtx.CtxSessionConfig) error {
 	var tokIsNew bool = false
 	var sid string = ""
 	if tokQ, ok := c.GetQuery("tok"); ok{
-		logx.DebugPrint("Get query token.")
+		logx.Debug("Get query token.")
 		token = tokQ
 	} else if tokP, ok := c.GetPostForm("tok"); ok{
-		logx.DebugPrint("Get form token.")
+		logx.Debug("Get form token.")
 		token = tokP
 	} else if c.Sess != nil && len(c.Sess.Token) > 10{
-		logx.DebugPrint("Get session token.")
+		logx.Debug("Get session token.")
 		c.Sess.TokIsNew = false;
 		token = c.Sess.Token;
 	} else {
-		logx.DebugPrint("Request has no token, need to new one.")
+		logx.Debug("Request has no token, need to new one.")
 		sid, token = jwtx.GenToken(ctxSessConf.Secret)
 		tokIsNew = true
 	}
@@ -39,7 +39,7 @@ func (c *Context)InitSession(ctxSessConf *jwtx.CtxSessionConfig) error {
 		sid, _ = jwtx.FetchSid(token)
 	}
 	if c.Sess == nil {
-		logx.DebugPrint(">>>>>>>>>>>>>>>>>>>>>>>>>>>New Session>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
+		logx.Debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>New Session>>>>>>>>>>>>>>>>>>>>>>>>>>>>>")
 		c.Sess = &jwtx.CtxSession{
 			Session: jwtx.Session{
 				Sid:   sid,
@@ -51,10 +51,10 @@ func (c *Context)InitSession(ctxSessConf *jwtx.CtxSessionConfig) error {
 			TokIsNew: tokIsNew,
 		}
 	} else {
-		logx.DebugPrint("Session has one token: %s", token)
+		logx.Debugf("Session has one token: %s", token)
 	}
 	if c.Sess.Redis == nil {
-		logx.DebugPrint("Init session redis...")
+		logx.Debug("Init session redis...")
 		c.Sess.Redis = redis.GetSingletonRedis(&c.Sess.RedisConnCnf)
 	}
 	if tokIsNew{

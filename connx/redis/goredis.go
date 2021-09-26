@@ -2,7 +2,6 @@ package redis
 
 import (
 	"context"
-	"fmt"
 	"github.com/go-redis/redis/v8"
 	"github.com/linmingxiao/gneo/logx"
 )
@@ -62,11 +61,11 @@ func NewGoRedis(cf *ConnConfig) *GoRedisX {
 			PoolSize:     cf.PoolSize,
 			MinIdleConns: cf.MinIdle,
 			OnConnect: func(ctx context.Context, cn *redis.Conn) error {
-				logx.Info(fmt.Sprintf("%s——%s connected.", cf.MasterName, cn.String()))
+				logx.Infof("%s——%s connected.", cf.MasterName, cn.String())
 				return nil
 			},
 		})
-		logx.Info(fmt.Sprintf("Redis %s —— %s created.", cf.MasterName, cf.Addr))
+		logx.Infof("Redis %s —— %s created.", cf.MasterName, cf.Addr)
 	} else if cf.SentinelAddr != nil {
 		// 通过sentinel连接 redis
 		rds.Cli = redis.NewFailoverClient(&redis.FailoverOptions{
@@ -79,11 +78,11 @@ func NewGoRedis(cf *ConnConfig) *GoRedisX {
 			PoolSize:         cf.PoolSize,
 			MinIdleConns:     cf.MinIdle,
 			OnConnect: func(ctx context.Context, cn *redis.Conn) error {
-				logx.Info(fmt.Sprintf("%s —— %s connected.", cf.MasterName, cn.String()))
+				logx.Info("%s —— %s connected.", cf.MasterName, cn.String())
 				return nil
 			},
 		})
-		logx.Info(fmt.Sprintf("Redis %s created.", cf.MasterName))
+		logx.Infof("Redis %s created.", cf.MasterName)
 	}
 
 	return &rds

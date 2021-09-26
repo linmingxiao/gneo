@@ -11,7 +11,7 @@ type APPConfig struct {
 	// RedirectFixedPath    bool // 此项特性无多大必要，不兼容Gin
 	Name                   string `json:",optional,default=GoFastSite"`
 	Addr                   string `json:",default=0.0.0.0:8099"`
-	RunMode                string `json:",default=debug,options=debug|test|product"` // 当前模式[debug|test|product]
+	RunMode                string `json:",default=debug,options=debug|test|release"` // 当前模式[debug|test|release]
 	SecureJsonPrefix       string `json:",optional,default=while(1);"`
 	MaxMultipartMemory     int64  `json:",default=33554432"` // 最大上传文件的大小，默认32MB
 	SecondsBeforeShutdown  int64  `json:",default=1000"`     // 退出server之前等待的毫秒，等待清理释放资源

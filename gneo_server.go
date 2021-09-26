@@ -1,9 +1,9 @@
 package gneo
 
 import (
-	"net/http"
-	"github.com/linmingxiao/gneo/skill/httpx"
 	"github.com/linmingxiao/gneo/logx"
+	"github.com/linmingxiao/gneo/skill/httpx"
+	"net/http"
 	"time"
 )
 

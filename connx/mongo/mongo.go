@@ -1,9 +1,7 @@
 package mongo
 
 import (
-	"fmt"
 	"context"
-	"time"
 	"github.com/linmingxiao/gneo/logx"
 	_ "go.mongodb.org/mongo-driver/bson"
 	_ "go.mongodb.org/mongo-driver/bson/primitive"
@@ -11,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 	_ "go.mongodb.org/mongo-driver/x/bsonx"
-
+	"time"
 )
 
 // Redigo初始化的配置参数
@@ -34,7 +32,7 @@ func (mgX *MgoX) Close() {
 	if err != nil {
 		logx.Error(err)
 	}
-	logx.Info("MongoDB %v closed.", mgX.Cli)
+	logx.Infof("MongoDB %v closed.", mgX.Cli)
 }
 
 func NewMongo(cf *ConnConfig) *MgoX {
@@ -44,15 +42,15 @@ func NewMongo(cf *ConnConfig) *MgoX {
 	clientUri := options.Client().ApplyURI(uri).SetMaxPoolSize(cf.MaxPoolSize)
 	client, err := mongo.Connect(ctx, clientUri)
 	if err != nil {
-		logx.Error("MongoDB connect err: %v", err)
+		logx.Errorf("MongoDB connect err: %v", err)
 		panic(err)
 	}
 	err = client.Ping(ctx, readpref.Primary())
 	if err != nil {
-		logx.Error("MongoDB ping err: %v", err)
+		logx.Errorf("MongoDB ping err: %v", err)
 		panic(err)
 	}
 	dataBase := client.Database(cf.Database)
-	logx.Info(fmt.Sprintf("MongoDB: %s connect sucess!", cf.MasterName))
+	logx.Infof("MongoDB: %s connect sucess!", cf.MasterName)
 	return &MgoX{DB: dataBase, Cli: client, Ctx: context.Background()}
 }

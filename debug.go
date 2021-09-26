@@ -48,7 +48,7 @@ func debugPrint(format string, values ...interface{}) {
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
-		fmt.Fprintf(DefaultWriter, "[GNEO-debug] "+format, values...)
+		fmt.Fprintf(DefaultWriter, "[Debug] "+format, values...)
 	}
 }
 

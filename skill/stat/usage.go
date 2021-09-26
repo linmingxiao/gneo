@@ -55,6 +55,6 @@ func bToMb(b uint64) float32 {
 func printUsage() {
 	var m runtime.MemStats
 	runtime.ReadMemStats(&m)
-	logx.Statf("CPU: %dm, MEMORY: Alloc=%.1fMi, TotalAlloc=%.1fMi, Sys=%.1fMi, NumGC=%d",
+	logx.Info("CPU: %dm, MEMORY: Alloc=%.1fMi, TotalAlloc=%.1fMi, Sys=%.1fMi, NumGC=%d",
 		CpuUsage(), bToMb(m.Alloc), bToMb(m.TotalAlloc), bToMb(m.Sys), m.NumGC)
 }

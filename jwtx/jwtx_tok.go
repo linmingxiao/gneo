@@ -1,12 +1,11 @@
 package jwtx
 
 import (
-	"fmt"
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/base64"
-	"github.com/linmingxiao/gneo/skill/lang"
 	"github.com/linmingxiao/gneo/logx"
+	"github.com/linmingxiao/gneo/skill/lang"
 	"regexp"
 	"strings"
 )
@@ -33,9 +32,9 @@ func FetchSid(tok string) (string, string) {
 // 闪电侠SID：为24位的字符串
 func GenToken(secret string) (string, string) {
 	sid := genSid(24)
-	logx.Info(fmt.Printf("New sid: %s", sid))
+	logx.Infof("New sid: %s", sid)
 	tok := TokenPrefix + genSign(sid, secret)
-	logx.Info(fmt.Printf("New token: %s", tok))
+	logx.Infof("New token: %s", tok)
 	return sid, tok
 }
 
