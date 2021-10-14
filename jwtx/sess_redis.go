@@ -19,7 +19,7 @@ type CtxSessionConfig struct {
 
 
 type CtxRedisSessionFunc interface {
-	LoadFromRedis(string) (bool, error) //从 Redis 中 Load Session
+	LoadFromRedis(interface{}) (bool, error) //从 Redis 中 Load Session
 	SaveToRedis() (string, error) //将 Session 保存到 Redis
 	SetRedisExpire() (bool, error) //重新设定 Redis Session过期时间
 	DestroyRedis() (int64, error)//销毁 Redis Session

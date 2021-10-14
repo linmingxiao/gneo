@@ -6,13 +6,14 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/linmingxiao/gneo/logx"
 	"time"
+	_ "fmt"
 )
 
 type ConnConfig struct {
 	ConnStr string `json:",optional"`
 	MasterName string `json:",optional"`
-	MaxOpen int    `json:",default=100000,range=[10:100000]"`
-	MaxIdle int    `json:",optional"`
+	MaxOpen int    `json:",default=100,range=[10:150]"`
+	MaxIdle int    `json:",default=100,range=[10:150]"`
 }
 
 type MSqlX struct {
@@ -29,11 +30,15 @@ func NewMysqlConn(cf *ConnConfig) *MSqlX {
 	} else {
 		logx.Infof("Mysql %s connect successfully.", cf.MasterName)
 	}
+
 	// See "Important settings" section.
-	db.SetConnMaxLifetime(time.Minute * 3)
+	db.SetConnMaxLifetime(time.Minute * 60 * 24 * 30)
 	db.SetMaxOpenConns(cf.MaxOpen)
 	db.SetMaxIdleConns(cf.MaxIdle)
 
 	mysqlX.Cli = db
 	return &mysqlX
 }
+
+
+
