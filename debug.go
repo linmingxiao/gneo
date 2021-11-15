@@ -1,8 +1,7 @@
 package gneo
 
 import (
-	"fmt"
-	"html/template"
+	"github.com/linmingxiao/gneo/logx"
 	"runtime"
 	"strconv"
 	"strings"
@@ -20,35 +19,24 @@ func IsDebugging() bool {
 var DebugPrintRouteFunc func(httpMethod, absolutePath, handlerName string, nuHandlers int)
 
 func debugPrintRoute(httpMethod, absolutePath string, handlers HandlersChain) {
-	if IsDebugging() {
+
+	if logx.IsDebug() {
 		nuHandlers := len(handlers)
 		handlerName := nameOfFunction(handlers.Last())
 		if DebugPrintRouteFunc == nil {
-			debugPrint("%-6s %-25s --> %s (%d handlers)\n", httpMethod, absolutePath, handlerName, nuHandlers)
+			logx.Debugf("%-6s %-25s --> %s (%d handlers)\n", httpMethod, absolutePath, handlerName, nuHandlers)
 		} else {
 			DebugPrintRouteFunc(httpMethod, absolutePath, handlerName, nuHandlers)
 		}
 	}
 }
 
-func debugPrintLoadTemplate(tmpl *template.Template) {
-	if IsDebugging() {
-		var buf strings.Builder
-		for _, tmpl := range tmpl.Templates() {
-			buf.WriteString("\t- ")
-			buf.WriteString(tmpl.Name())
-			buf.WriteString("\n")
-		}
-		debugPrint("Loaded HTML Templates (%d): \n%s\n", len(tmpl.Templates()), buf.String())
-	}
-}
-
 func debugPrint(format string, values ...interface{}) {
-	if IsDebugging() {
+	if logx.IsDebug() {
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
-		fmt.Fprintf(DefaultWriter, "[Debug] "+format, values...)
+		logx.Debugf(format, values...)
 	}
 }
 
@@ -63,36 +51,20 @@ func getMinVer(v string) (uint64, error) {
 
 func debugPrintWARNINGDefault() {
 	if v, e := getMinVer(runtime.Version()); e == nil && v <= ginSupportMinGoVer {
-		debugPrint(`[WARNING] Now GNEO requires Go 1.13+.
-
-`)
+		logx.Warnf(`Now GNEO requires Go 1.13+.`)
 	}
-	debugPrint(`[WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
-
-`)
+	logx.Warnf(`Creating an Engine instance with the Logger and Recovery middleware already attached.`)
 }
 
 func debugPrintWARNINGNew() {
-	debugPrint(`[WARNING] Running in "debug" mode. Switch to "release" mode in production.
+	logx.Warnf(`Running in "debug" mode. Switch to "release" mode in production.
  - using env:	export GNEO_MODE=release
  - using code:	gneo.SetMode(gneo.ReleaseMode)
-
-`)
-}
-
-func debugPrintWARNINGSetHTMLTemplate() {
-	debugPrint(`[WARNING] Since SetHTMLTemplate() is NOT thread-safe. It should only be called
-at initialization. ie. before any route is registered or the router is listening in a socket:
-
-	router := gneo.Default()
-	router.SetHTMLTemplate(template) // << good place
-
 `)
 }
 
 func debugPrintError(err error) {
-	if err != nil && IsDebugging() {
-		fmt.Fprintf(DefaultErrorWriter, "[GNEO-debug] [ERROR] %v\n", err)
+	if err != nil && logx.IsDebug() {
+		logx.Debugf("[ERROR] %v\n", err)
 	}
 }
-

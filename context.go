@@ -924,14 +924,6 @@ func (c *Context) Render(code int, r render.Render) {
 	}
 }
 
-// HTML renders the HTTP template specified by its file name.
-// It also updates the HTTP code and sets the Content-Type as "text/html".
-// See http://golang.org/doc/articles/wiki/
-func (c *Context) HTML(code int, name string, obj interface{}) {
-	instance := c.engine.HTMLRender.Instance(name, obj)
-	c.Render(code, instance)
-}
-
 // IndentedJSON serializes the given struct as pretty JSON (indented + endlines) into the response body.
 // It also sets the Content-Type as "application/json".
 // WARNING: we recommend to use this only for development purposes since printing pretty JSON is
@@ -981,11 +973,6 @@ func (c *Context) PureJSON(code int, obj interface{}) {
 // It also sets the Content-Type as "application/xml".
 func (c *Context) XML(code int, obj interface{}) {
 	c.Render(code, render.XML{Data: obj})
-}
-
-// YAML serializes the given struct as YAML into the response body.
-func (c *Context) YAML(code int, obj interface{}) {
-	c.Render(code, render.YAML{Data: obj})
 }
 
 // ProtoBuf serializes the given struct as ProtoBuf into the response body.
@@ -1097,17 +1084,9 @@ func (c *Context) Negotiate(code int, config Negotiate) {
 		data := chooseData(config.JSONData, config.Data)
 		c.JSON(code, data)
 
-	case binding.MIMEHTML:
-		data := chooseData(config.HTMLData, config.Data)
-		c.HTML(code, config.HTMLName, data)
-
 	case binding.MIMEXML:
 		data := chooseData(config.XMLData, config.Data)
 		c.XML(code, data)
-
-	case binding.MIMEYAML:
-		data := chooseData(config.YAMLData, config.Data)
-		c.YAML(code, data)
 
 	default:
 		c.AbortWithError(http.StatusNotAcceptable, errors.New("the accepted formats are not offered by the server")) // nolint: errcheck

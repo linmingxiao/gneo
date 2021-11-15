@@ -45,15 +45,25 @@ func InitLogger(cfg *LogConfig) {
 	})
 }
 
+
+
+
+
+//********************************************************
+//定制方法
+
 //********************************************************
 //对外的方法
+func IsDebug() bool {
+	return logger.level == m_debug
+}
 
 func Log(values ...interface{})  {
 	fmt.Fprintln(logger.ioWriter, values...)
 }
 
 func Trace(values ...interface{})  {
-	if logger.level <= trace{
+	if logger.level <= m_trace{
 		params := []interface{}{"[Trace]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -61,7 +71,7 @@ func Trace(values ...interface{})  {
 }
 
 func Debug(values ...interface{})  {
-	if logger.level <= debug{
+	if logger.level <= m_debug{
 		params := []interface{}{"[Debug]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -69,7 +79,7 @@ func Debug(values ...interface{})  {
 }
 
 func Info(values ...interface{})  {
-	if logger.level <= info{
+	if logger.level <= m_info{
 		params := []interface{}{"[Info]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -77,7 +87,7 @@ func Info(values ...interface{})  {
 }
 
 func Warn(values ...interface{})  {
-	if logger.level <= warn{
+	if logger.level <= m_warn{
 		params := []interface{}{"[Warn]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -85,7 +95,7 @@ func Warn(values ...interface{})  {
 }
 
 func Error(values ...interface{})  {
-	if logger.level <= error{
+	if logger.level <= m_error{
 		params := []interface{}{"[Error]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -93,7 +103,7 @@ func Error(values ...interface{})  {
 }
 
 func Fatal(format string, values ...interface{})  {
-	if logger.level <= fatal{
+	if logger.level <= m_fatal{
 		params := []interface{}{"[Fatal]"}
 		params = append(params, values...)
 		fmt.Fprintln(logger.ioWriter, params...)
@@ -102,7 +112,7 @@ func Fatal(format string, values ...interface{})  {
 
 
 func Tracef(format string, values ...interface{})  {
-	if logger.level <= trace{
+	if logger.level <= m_trace{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -111,7 +121,7 @@ func Tracef(format string, values ...interface{})  {
 }
 
 func Debugf(format string, values ...interface{})  {
-	if logger.level <= debug{
+	if logger.level <= m_debug{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -120,7 +130,7 @@ func Debugf(format string, values ...interface{})  {
 }
 
 func Infof(format string, values ...interface{})  {
-	if logger.level <= info{
+	if logger.level <= m_info{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -129,7 +139,7 @@ func Infof(format string, values ...interface{})  {
 }
 
 func Warnf(format string, values ...interface{})  {
-	if logger.level <= warn{
+	if logger.level <= m_warn{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -138,7 +148,7 @@ func Warnf(format string, values ...interface{})  {
 }
 
 func Errorf(format string, values ...interface{})  {
-	if logger.level <= error{
+	if logger.level <= m_error{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}
@@ -147,7 +157,7 @@ func Errorf(format string, values ...interface{})  {
 }
 
 func Fatalf(format string, values ...interface{})  {
-	if logger.level <= fatal{
+	if logger.level <= m_fatal{
 		if !strings.HasSuffix(format, "\n") {
 			format += "\n"
 		}

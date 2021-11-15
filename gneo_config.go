@@ -2,7 +2,6 @@ package gneo
 
 import (
 	"github.com/linmingxiao/gneo/logx"
-	"github.com/linmingxiao/gneo/render"
 )
 
 type APPConfig struct {
@@ -30,7 +29,6 @@ type APPConfig struct {
 	FitJwtSecret           string `json:",optional"`                            // JWT认证的秘钥
 	FitLogType             string `json:",default=json,options=json|sdx"`
 
-	HTMLRender render.HTMLRender `json:",optional"`
 	modeType   int8              `inner:",optional"` // 内部记录状态
 }
 

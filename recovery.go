@@ -7,6 +7,7 @@ package gneo
 import (
 	"bytes"
 	"fmt"
+	"github.com/linmingxiao/gneo/logx"
 	"io"
 	"io/ioutil"
 	"log"
@@ -79,7 +80,7 @@ func CustomRecoveryWithWriter(out io.Writer, handle RecoveryFunc) HandlerFunc {
 					headersToStr := strings.Join(headers, "\r\n")
 					if brokenPipe {
 						logger.Printf("%s\n%s%s", err, headersToStr)
-					} else if IsDebugging() {
+					} else if logx.IsDebug() {
 						logger.Printf("[Recovery] %s panic recovered:\n%s\n%s\n%s%s",
 							timeFormat(time.Now()), headersToStr, err, stack)
 					} else {

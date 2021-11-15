@@ -109,10 +109,10 @@ const (
 
 type node struct {
 	path      string
-	indices   string
+	indices   string  //索引
 	wildChild bool
 	nType     nodeType
-	priority  uint32
+	priority  uint32  //优先级
 	children  []*node // child nodes, at most 1 :param style node at the end of the array
 	handlers  HandlersChain
 	fullPath  string
@@ -153,7 +153,7 @@ func (n *node) addRoute(path string, handlers HandlersChain) {
 	n.priority++
 
 	// Empty tree
-	if len(n.path) == 0 && len(n.children) == 0 {
+	if len(n.path) == 0 && len(n.children) == 0 	{
 		n.insertChild(path, fullPath, handlers)
 		n.nType = root
 		return

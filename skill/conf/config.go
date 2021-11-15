@@ -36,6 +36,6 @@ func LoadConfigFromYamlBytes(content []byte, v interface{}) error {
 
 func MustLoad(path string, v interface{}) {
 	if err := LoadConfig(path, v); err != nil {
-		log.Fatalf("error: config file %s, %s", path, err.Error())
+		log.Fatalf( "error: config file %s, %s", path, err.Error())
 	}
 }

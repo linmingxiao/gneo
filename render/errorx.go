@@ -1,12 +1,12 @@
 package render
 
 import (
-	_ "reflect"
 	"github.com/linmingxiao/gneo/logx"
+	_ "reflect"
 )
 
 var MapErrorCode map[int]string = map[int]string{
-	0: "请求成功",
+	0:    "请求成功",
 
 	-100: "鼎信汇金公募基金系统维护升级中，暂时无法访问，为此给您带来的不便深表歉意。",
 	-1:   "未知错误",
@@ -123,29 +123,6 @@ func NewErrorX(pms ...interface{}) *ErrorX{
 			logx.Error("NewErrorX参数错误")
 			panic("NewErrorX参数错误")
 		}
-		//if reflect.TypeOf(pms[0]).Kind() == reflect.Int{
-		//	errCode := pms[0].(int)
-		//	if errMsg, ok := MapErrorCode[errCode]; ok{
-		//		return &ErrorX{
-		//			ErrCode: errCode,
-		//			ErrMsg: errMsg,
-		//		}
-		//	} else {
-		//		return &ErrorX{
-		//			ErrCode: errCode,
-		//			ErrMsg: "未知错误",
-		//		}
-		//	}
-		//} else if reflect.TypeOf(pms[0]).Kind() == reflect.String{
-		//	errMsg := pms[0].(string)
-		//	return &ErrorX{
-		//		ErrCode: -1,
-		//		ErrMsg: errMsg,
-		//	}
-		//} else {
-		//	logx.Error("NewErrorX参数错误")
-		//	panic("NewErrorX参数错误")
-		//}
 	} else {
 		logx.Error("NewErrorX参数错误")
 		panic("NewErrorX参数错误")
