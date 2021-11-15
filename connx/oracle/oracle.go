@@ -3,7 +3,10 @@ package oracle
 import (
 	"context"
 	"database/sql"
+	"fmt"
 	"github.com/linmingxiao/gneo/logx"
+	"log"
+	"os"
 	"time"
 
 	_ "github.com/wendal/go-oci8"
@@ -43,36 +46,36 @@ func NewOracleConn(cf *ConnConfig) *OracleX {
 
 
 
-
-//func query() {
-//	os.Setenv("NLS_LANG", "AMERICAN_AMERICA.AL32UTF8")
-//	log.SetFlags(log.Lshortfile | log.LstdFlags)
-//	db, err := sql.Open("oci8", "hssale/gmsale@192.168.19.21:1521/dspdb")
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-//	defer db.Close()
-//	rows, err := db.Query("select * from v$version")
-//	if err != nil {
-//		log.Fatal(err)
-//	}
-//	cols, _ := rows.Columns()
-//	rawResult := make([][]byte, len(cols))
-//	result := make([]string, len(cols))
-//	dest := make([]interface{}, len(cols))
-//	for i := range rawResult {
-//		dest[i] = &rawResult[i]
-//	}
-//	for rows.Next() {
-//		err = rows.Scan(dest...)
-//		for i, raw := range rawResult {
-//			if raw == nil {
-//				result[i] = ""
-//			} else {
-//				result[i] = string(raw)
-//			}
-//		}
-//		fmt.Printf("%s\n", result[0])
-//	}
-//	rows.Close()
-//}
+//示例方法，请勿调用
+func Examplequery() {
+	os.Setenv("NLS_LANG", "AMERICAN_AMERICA.AL32UTF8")
+	log.SetFlags(log.Lshortfile | log.LstdFlags)
+	db, err := sql.Open("oci8", "hssale/gmsale@192.168.19.21:1521/dspdb")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer db.Close()
+	rows, err := db.Query("select * from v$version")
+	if err != nil {
+		log.Fatal(err)
+	}
+	cols, _ := rows.Columns()
+	rawResult := make([][]byte, len(cols))
+	result := make([]string, len(cols))
+	dest := make([]interface{}, len(cols))
+	for i := range rawResult {
+		dest[i] = &rawResult[i]
+	}
+	for rows.Next() {
+		err = rows.Scan(dest...)
+		for i, raw := range rawResult {
+			if raw == nil {
+				result[i] = ""
+			} else {
+				result[i] = string(raw)
+			}
+		}
+		fmt.Printf("%s\n", result[0])
+	}
+	rows.Close()
+}
