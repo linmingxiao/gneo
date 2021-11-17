@@ -42,6 +42,9 @@ func InitLogger(cfg *LogConfig) {
 			mode: cfg.Mode,
 			level: cfg.Level,
 		}
+
+		fmt.Fprintln(ioWriter, "[Info] Init logger suc:", fileName)
+
 	})
 }
 

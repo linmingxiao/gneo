@@ -8,8 +8,7 @@ import (
 	"log"
 	"os"
 	"time"
-
-	_ "github.com/wendal/go-oci8"
+	_ "github.com/mattn/go-oci8"
 )
 
 
