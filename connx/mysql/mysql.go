@@ -31,6 +31,14 @@ func NewMysqlConn(cf *ConnConfig) *MSqlX {
 		logx.Infof("Mysql %s connect successfully.", cf.MasterName)
 	}
 
+	//Mysql惰性连接池问题，这里Open成功之后需要ping一次，确保Mysql连接成功
+	if errPing := db.Ping(); errPing!= nil{
+		logx.Errorf("Mysql %s ping failed:", cf.MasterName)
+		logx.Error(errPing)
+	} else {
+		logx.Debugf("Mysql %s ping successfully.", cf.MasterName)
+	}
+
 	// See "Important settings" section.
 	db.SetConnMaxLifetime(time.Minute * 60 * 24 * 30)
 	db.SetMaxOpenConns(cf.MaxOpen)
