@@ -6,9 +6,10 @@ package sqlx
 import (
 	"context"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql" //mysql
+	_ "github.com/mattn/go-oci8" //oracle
 	"github.com/jmoiron/sqlx"
 	"github.com/linmingxiao/gneo/logx"
-	_ "github.com/mattn/go-oci8"
 	"time"
 )
 
@@ -42,7 +43,7 @@ func NewSqlXConn(cf *ConnConfig) *SqlX {
 		logx.Infof("%s %s connect successfully.",cf.Type, cf.MasterName)
 	}
 
-	//Mysql惰性连接池问题，这里Open成功之后需要ping一次，确保Mysql连接成功
+	//SQL惰性连接池问题，这里Open成功之后需要ping一次，确保Mysql连接成功
 	if errPing := db.Ping(); errPing!= nil{
 		logx.Errorf("DB %s ping failed:", cf.MasterName)
 		logx.Error(errPing)
@@ -50,7 +51,7 @@ func NewSqlXConn(cf *ConnConfig) *SqlX {
 		logx.Debugf("DB %s ping successfully.", cf.MasterName)
 	}
 
-	// See "Important settings" section.
+	//See "Important settings" section.
 	db.SetConnMaxLifetime(time.Minute * 60 * 24 * 30)
 	db.SetMaxOpenConns(cf.MaxOpen)
 	db.SetMaxIdleConns(cf.MaxIdle)
