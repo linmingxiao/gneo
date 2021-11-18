@@ -10,6 +10,7 @@ require (
 	github.com/goccy/go-json v0.7.8
 	github.com/golang/protobuf v1.5.2
 	github.com/gomodule/redigo v1.8.5
+	github.com/jmoiron/sqlx v1.3.4 // indirect
 	github.com/json-iterator/go v1.1.11
 	github.com/linmingxiao/gneo v0.0.0-20210831084748-b36163b79150
 	github.com/mattn/go-oci8 v0.1.1 // indirect
