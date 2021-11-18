@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 	_ "github.com/go-sql-driver/mysql" //mysql
-	_ "github.com/mattn/go-oci8" //oracle
 	"github.com/jmoiron/sqlx"
 	"github.com/linmingxiao/gneo/logx"
+	_ "github.com/mattn/go-oci8" //oracle
 	"time"
 )
 
@@ -47,6 +47,7 @@ func NewSqlXConn(cf *ConnConfig) *SqlX {
 	if errPing := db.Ping(); errPing!= nil{
 		logx.Errorf("DB %s ping failed:", cf.MasterName)
 		logx.Error(errPing)
+		panic(errPing)
 	} else {
 		logx.Debugf("DB %s ping successfully.", cf.MasterName)
 	}
